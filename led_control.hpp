@@ -4,12 +4,10 @@
 #include "constants.hpp"
 #include "global.hpp"
 
-#define LED_COUNT 6
 
 class SimpleLed {
 private:
   unsigned long last_update;
-  bool led_state_map[LED_COUNT] = {0,0,0,0,0,0};
   int target_state = 1;
   
 public:

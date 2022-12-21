@@ -43,6 +43,7 @@ void SimpleBTN::check(unsigned long now) {
   bool yellow_stat = is_pressed(BTN_YELLOW);
   bool orange_stat = is_pressed(BTN_ORANGE);
 
+
   if (yellow_stat != btn_yellow_state) {
     if (yellow_stat) { // NOTE : PRESSED
       if (now - yellow_last_update > 50) {
@@ -72,6 +73,9 @@ void SimpleBTN::check(unsigned long now) {
       btn_orange_state = orange_stat;
     }
   }
+
+  btn_state_map[0] = btn_yellow_state;
+  btn_state_map[1] = btn_orange_state;
 }
 
 #endif

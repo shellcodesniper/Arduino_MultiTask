@@ -24,6 +24,8 @@ char DISPLAY_MSG[2][16];
 
 int cursor_row = 0, cursor_col = 0;
 
+const char CYCLE_RESET_STRING[12] = "            ";
+
 // It will be shared ( same thread, don't be worry )
 
 #endif

@@ -18,7 +18,6 @@ void system_setup() {
   lcd.backlight();
   // NOTE : LCD 배경 불 켜기
   lcd.setCursor(0, 0);
-  lcd.print("Boot, Up!");
   for(int i=0;i<6;i+=1) {
     pinMode(LED_LIST[i], OUTPUT);
   }
