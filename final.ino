@@ -7,7 +7,7 @@ SimpleLCD LCD;
 SimpleIR IR;
 SimpleBTN BTN;
 
-void system_setup() {
+void setup() {
   Serial.begin(2000000);
   // NOTE : 통신 속도를 높이기 위해 2Mbps로 설정
   // IrReceiver.begin(IR_PIN, DISABLE_LED_FEEDBACK);
@@ -27,10 +27,6 @@ void system_setup() {
 
 }
 
-void setup() {
-  system_setup();
-}
-
 // TODO : 타이머를 이용하여, 주기적으로 각 상태를 체크하여, 해당 상태별 동작을 수행하도록 한다.
 // TODO : 간단하지만, 시분할 사용을 아두이노로 구현해보도록함.
 
@@ -46,8 +42,6 @@ enum CheckState {
 };
 
 
-
-
 void loop() {
 
   CUR = millis();
@@ -57,7 +51,9 @@ void loop() {
   //   IrReceiver.resume();
   // }
   // Println(CUR - START);
+  // NOTE : IR 시간 문제로 비활성화
 
+  // NOTE : CHECKState 에 따른 분기 -> 각 Class의 check fn 호출
   switch (check_state) {
     case CHECK_IR:
       // Println("CHECK_IR");
