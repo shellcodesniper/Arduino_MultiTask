@@ -251,18 +251,31 @@ void SimpleLCD::main_sequence() {
   //     break;
   // }
   if (action == 1900) { // NOTE : 반복 제어문 똑 떼어옴.
-    Println("INFO_COUNT : " + String(info_count));
     info_count += 1;
     action = 1002;
-    if (info_count > 4) {
+
+    if (info_count % 2 == 0) {
       action = 1002;
-      info_count = 0;
+    } else {
+      action = 1100;
     }
-    if (info_count >= 2) {
-      action = 1100; // NOTE : 현재 주기
-    }
-    // NOTE : 루프처럼 돌아가도록 해주는곳.
-  }
+
+    // if (info_count < 3) {
+    //   action = 1002;
+    // } else if (info_count == 3) {
+    //   action = 1100; // NOTE : 현재 주기
+    // } else if (info_count > 3 && info_count < 7) {
+    //   action = 1102; // NOTE : FIRST_LINE 출력 안함.
+    // } else {
+    //   action = 1002;
+    //   info_count = 0;
+    //   // NOTE : 초기화
+    // }
+    Println("INFO_COUNT : " + String(info_count) + "SELECTED : " + String(action));
+
+  } // NOTE : 루프처럼 돌아가도록 해주는곳.
+  int idx = 11;
+  unsigned int cycle_period = led_loop_time;
 
   switch(action) {
     case 1000:
@@ -307,7 +320,7 @@ void SimpleLCD::main_sequence() {
 
     case 1007:
       action = 1900; // NOTE : 반복 제어문으로
-      wait(100);
+      wait(1000);
       break;
 
     case 1100:
@@ -324,8 +337,6 @@ void SimpleLCD::main_sequence() {
 
     case 1102:
       strncpy(cycle_period_str, CYCLE_RESET_STRING, 12);
-      int idx = 12;
-      unsigned int cycle_period = led_loop_time;
       while (cycle_period > 0) {
         cycle_period_str[idx] = (cycle_period % 10) + '0'; // HACK : ASCII CODE
         cycle_period /= 10;
@@ -336,11 +347,8 @@ void SimpleLCD::main_sequence() {
 
     case 1103:
       action = 1900; // NOTE : 반복 제어문으로
-      wait(100);
+      wait(1000);
       break;
-
-
-
 
     default:
       Println("ERROR : main_sequence() : action can not be " + String(action));

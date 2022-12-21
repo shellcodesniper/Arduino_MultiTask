@@ -30,7 +30,7 @@ void SimpleLed::reverse(int idx) {
 void SimpleLed::check(unsigned long now) {
   // Println("LED CHECK");
   
-  if (now - last_update > led_loop_time) {
+  if (now - last_update > int(led_loop_time / LED_COUNT)) {
     // Println("LED 변경");
     int target_state_count = 0;
     bool is_changed = false;
